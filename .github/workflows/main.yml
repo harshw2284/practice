@@ -16,14 +16,14 @@ jobs:
         needs: [test]
         uses: ./.github/workflows/build.yml
         with:
-            image-name: java-app
+            image-name: java-maven-app
             tag: ${{github.sha}}
 
     push:
         needs: [build]
         uses: ./.github/workflows/push.yml
         with:
-            image-name: java-app
+            image-name: java-maven-app
             image-tag: ${{github.sha}}
 
         secrets:
