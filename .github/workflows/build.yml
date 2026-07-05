@@ -27,6 +27,8 @@ jobs:
               uses: docker/build-push-action@v5
               with: 
                 context: .
+                file: ./dockerfile
+
                 push: true
                 tags: ${{ inputs.image-name }}:latest
                 outputs: type=docker,dest=/tmp/image.tar
