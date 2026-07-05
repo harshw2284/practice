@@ -1,0 +1,34 @@
+name: Main Pipeline
+
+on: 
+    workflow_dispatch:
+
+env:
+  IMAGE_NAME: java-maven-cicd-demo
+
+jobs:
+    test:
+        uses: ./.github/workflows/test.yml
+        with:
+            java-version: '17'
+
+    build:
+        needs: [test]
+        uses: ./.github/workflows/build.yml
+        with:
+            image-name: java-app
+            tag: ${{github.sha}}
+
+    push:
+        needs: [build]
+        uses: ./.github/workflows/push.yml
+        with:
+            image-name: java-app
+            image-tag: ${{github.sha}}
+
+        secrets:
+            username: ${{ vars.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+
