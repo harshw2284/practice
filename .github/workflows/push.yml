@@ -41,10 +41,8 @@ jobs:
 
             - name: Tag image for Docker Hub
               run: |
-                docker tag java-maven-cicd-demo:<sha> ${{inputs.image-name}}/java-maven-cicd-demo:<sha>
-                docker tag java-maven-cicd-demo:<sha> ${{inputs.image-name}}/java-maven-cicd-demo:latest
+                docker tag java-maven-cicd-demo:latest ${{inputs.image-name}}/java-maven-cicd-demo:latest
 
             - name: Push image to Docker Hub
               run: |
-                docker push <username>/java-maven-cicd-demo:<sha>
-                docker push <username>/java-maven-cicd-demo:latest
+                docker push ${{vars.DOCKERHUB_USERNAME}}/java-maven-cicd-demo:latest
