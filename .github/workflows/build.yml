@@ -27,7 +27,7 @@ jobs:
               uses: docker/build-push-action@v5
               with: 
                 context: .
-                push: true
+                push: false
                 tags: ${{ inputs.image-name }}:${{ inputs.tag }}
                 outputs: type=docker,dest=/tmp/image.tar
                 cache-from: type=gha
