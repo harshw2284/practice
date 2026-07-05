@@ -41,8 +41,11 @@ jobs:
 
             - name: Tag image for Docker Hub
               run: |
-                  docker tag ${{ inputs.image-name }}:${{ inputs.image-tag }} \${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
-                  docker tag ${{ inputs.image-name }}:${{ inputs.image-tag }} \${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.image-name }}:latest
+                docker tag ${{ inputs.image-name }}:${{ inputs.image-tag }} \
+                  ${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
+                docker tag ${{ inputs.image-name }}:${{ inputs.image-tag }} \
+                  ${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.image-name }}:latest
+
             - name: Push image to Docker Hub
               run: |
                 docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
