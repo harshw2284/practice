@@ -1,1 +1,30 @@
+name: Code Test
 
+on: 
+    workflow_call:
+        inputs:
+            java-version:
+                description: 'Java version to use'
+                required: false
+                type: string
+                default: '17'
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Checkout code
+              run: actions/checkout@v4
+ 
+            - name: Set up java
+              uses: actions/setup-java@v4
+              with:
+                distribution: 'temurin'
+                java-version: ${{ inputs.java-version }}
+                cache: 'maven'
+                
+            - name: run tests
+              run: mvn -B test
+
+            
